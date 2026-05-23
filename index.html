@@ -1,1 +1,1458 @@
-<h1>villazar</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MERX / ANDVISHOP - Tienda Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <style>
+    /* ==========================================
+   PALETA DE COLORES Y VARIABLES (Celeste & Morado)
+   ========================================== */
+:root {
+  --bg-gradient: linear-gradient(135deg, #f0f4ff 0%, #f6f0ff 100%);
+  --surface: #ffffff;
+  
+  /* Tonos Principales */
+  --primary-celeste: #0e35d1;
+  --primary-morado: #7209b7;
+  --primary-mix: linear-gradient(135deg, #00b4d8 0%, #7209b7 100%);
+  
+  /* Estados y Variaciones */
+  --accent-glow: rgba(114, 9, 183, 0.15);
+  --text-main: #1e1b4b; /* Morado ultra oscuro para legibilidad */
+  --text-muted: #6b7280;
+  --border: rgba(114, 9, 183, 0.08);
+  --radius: 16px;
+  --transition: all 0.3s ease;
+}
+
+/* Base general */
+* {
+  box-sizing: border-box;
+  margin: 0; padding: 0;
+  font-family: 'Poppins', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+}
+
+/* ==========================================
+   HEADER & LOGO (Nombre de la marca)
+   ========================================== */
+header {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  position: sticky; top: 0; z-index: 100;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex; align-items: center; justify-content: space-between;
+}
+
+/* Efecto Mezcla en el Nombre de la Marca */
+/* Contenedor general del logo */
+.logo {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  cursor: pointer;
+  color: #7209b7; /* Color para la barra diagonal '/' (Morado sólido) */
+}
+
+/* COLOR PARA "ANDVISHOP" (Celeste Sólido Premium) */
+.marca-andvi {
+  color: #00b4d8; /* <-- Cambia este código de color para ANDVISHOP */
+}
+
+/* COLOR PARA "MERX" (Lila / Morado Sólido Vibrante) */
+.marca-merx {
+  color: #9d4edd; /* <-- Cambia este código de color para MERX */
+}
+/* Buscador Estético */
+.search-wrap {
+  flex: 1; max-width: 450px; margin: 0 2rem;
+  position: relative;
+}
+.search-wrap input {
+  width: 100%; padding: 0.75rem 1.2rem;
+  border-radius: 50px; border: 1px solid rgba(114, 9, 183, 0.15);
+  background: var(--surface); font-size: 0.95rem;
+  transition: var(--transition); outline: none;
+}
+.search-wrap input:focus {
+  border-color: var(--primary-celeste);
+  box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.15);
+}
+
+/* Botón Carrito */
+.cart-trigger {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 0.6rem 1.2rem; border-radius: 50px; cursor: pointer;
+  font-weight: 600; display: flex; align-items: center; gap: 8px;
+  transition: var(--transition); color: var(--primary-morado);
+}
+.cart-trigger:hover {
+  background: var(--primary-mix); color: white;
+  box-shadow: 0 4px 15px rgba(114, 9, 183, 0.2);
+}
+
+/* ==========================================
+   HERO / PORTADA
+   ========================================== */
+/* ==========================================
+   HERO / PORTADA CON IMAGEN ESTÉTICA
+   ========================================== */
+/* ==========================================
+   ARQUITECTURA DE PANEL DISTRIBUIDO (SIDEBAR SUPERIOR)
+   ========================================== */
+.app-layout {
+  display: flex;
+  max-width: 1440px;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+/* Menú Lateral Izquierdo */
+.sidebar-menu {
+  width: 290px;
+  flex-shrink: 0;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 1.5rem 1rem;
+  position: sticky;
+  top: 75px; /* Altura de tu cabecera fija */
+  height: calc(100vh - 75px);
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 10;
+}
+
+.menu-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #111827;
+  padding-left: 8px;
+  margin-bottom: 10px;
+}
+
+/* Botones / Chips dentro del menú vertical */
+.sidebar-menu .filter-chip {
+  width: 100%;
+  text-align: left;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  font-size: 0.9rem;
+  display: block;
+  cursor: pointer;
+  color: #4b5563;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+.sidebar-menu .filter-chip:hover {
+  background: rgba(0, 180, 216, 0.05);
+  color: #00b4d8;
+}
+.sidebar-menu .filter-chip.active {
+  background: linear-gradient(135deg, #7209b7, #00b4d8);
+  color: white;
+  font-weight: 600;
+}
+
+/* Desplegables Acordeón (details nativos) */
+.menu-dropdown {
+  width: 100%;
+  margin-bottom: 2px;
+}
+.menu-dropdown summary {
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #111827;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  transition: background 0.2s;
+}
+.menu-dropdown summary::-webkit-details-marker {
+  display: none;
+}
+.menu-dropdown summary::after {
+  content: "▼";
+  font-size: 0.65rem;
+  color: #9ca3af;
+  transition: transform 0.2s;
+}
+.menu-dropdown[open] summary::after {
+  transform: rotate(180deg);
+}
+.menu-dropdown summary:hover { 
+  background: rgba(114, 9, 183, 0.04); 
+}
+
+/* Subcategorías */
+.dropdown-content {
+  padding-left: 1rem;
+  margin: 4px 0 8px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-left: 1px dashed #e5e7eb;
+}
+.dropdown-content .filter-chip {
+  font-size: 0.85rem;
+  padding: 0.5rem 0.8rem;
+  color: #6b7280;
+}
+
+/* Contenido de la Derecha (Banners + Grilla) */
+.content-panel {
+  flex: 1;
+  padding: 0 1.5rem 4rem 1.5rem;
+  overflow-x: hidden;
+}
+
+/* Ajustes estructurales de banners comerciales */
+.hero-clean {
+  width: 100%;
+  margin: 1.5rem 0;
+}
+.hero-clean img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+.retail-promo-section {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.retail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+.retail-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+.retail-card:hover { transform: translateY(-4px); }
+.rc-img-wrap { width: 100%; height: 240px; background: #f9fafb; }
+.rc-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.rc-footer { display: flex; height: 70px; border-top: 1px solid #f3f4f6; align-items: stretch; }
+.rc-text { flex: 1; padding: 8px; display: flex; flex-direction: column; justify-content: center; }
+.rc-text h4 { font-size: 0.85rem; font-weight: 700; color: #111827; }
+.rc-text p { font-size: 0.72rem; color: #6b7280; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.rc-price-block { width: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+.rc-price-block.morado { background-color: #7209b7; }
+.rc-price-block.celeste { background-color: #00b4d8; }
+.price-now { font-size: 1rem; font-weight: 700; }
+.price-old { font-size: 0.6rem; opacity: 0.8; }
+
+.power-banners-section { width: 100%; margin-bottom: 3rem; }
+.power-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
+.power-banner { height: 140px; border-radius: 4px; padding: 1.5rem; display: flex; align-items: center; cursor: pointer; transition: opacity 0.2s; }
+.power-banner.lila-gradient { background: linear-gradient(135deg, #4d0782, #7209b7); }
+.power-banner.celeste-gradient { background: linear-gradient(135deg, #0077b6, #00b4d8); }
+.pb-content { color: white; }
+.pb-content h2 { font-size: 1.5rem; font-weight: 900; }
+.pb-content p { font-size: 0.8rem; opacity: 0.9; margin-bottom: 8px; }
+.pb-link { font-size: 0.75rem; font-weight: 700; text-decoration: underline; }
+
+.section-title-alt { display: flex; align-items: center; gap: 10px; margin: 2rem 0 1rem; }
+.section-title-alt h2 { font-size: 1.4rem; font-weight: 800; color: #111827; }
+.section-title-alt span { color: #6b7280; font-size: 0.85rem; }
+
+/* Control de nombres independientes en Logo */
+.logo { font-size: 1.6rem; font-weight: 800; cursor: pointer; color: #7209b7; }
+.marca-andvi { color: #00b4d8; }
+.marca-merx { color: #9d4edd; }
+
+/* Responsividad */
+@media (max-width: 950px) {
+  .app-layout { flex-direction: column; }
+  .sidebar-menu { width: 100%; height: auto; position: relative; top: 0; border-right: none; border-bottom: 1px solid #e5e7eb; }
+  .content-panel { padding: 0 1rem; }
+}
+.filter-chip:hover {
+  border-color: var(--primary-celeste); color: var(--primary-celeste);
+}
+.filter-chip.active {
+  background: var(--primary-mix); color: white; border-color: transparent;
+  box-shadow: 0 4px 12px rgba(114, 9, 183, 0.15);
+}
+
+/* Contador de resultados */
+.rc-text { max-width: 1200px; margin: 0 auto 1rem; padding: 0 2rem; color: var(--text-muted); font-size: 0.9rem; }
+
+/* ==========================================
+   GRILLA DE PRODUCTOS (Tarjetas Juego)
+   ========================================== */
+.main-grid {
+  max-width: 1200px; margin: 0 auto 4rem; padding: 0 2rem;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  overflow: hidden; cursor: pointer;
+  transition: var(--transition);
+  display: flex; flex-direction: column;
+  position: relative;
+}
+/* Efecto de levitación y brillo sutil al pasar el mouse por la tarjeta */
+.card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0, 180, 216, 0.3);
+  box-shadow: 0 12px 30px rgba(114, 9, 183, 0.08), 0 0 0 1px rgba(0, 180, 216, 0.1);
+}
+
+.card-img {
+  width: 100%; height: 220px; background: #fafafa;
+  position: relative; overflow: hidden;
+}
+.card-img img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+.card:hover .card-img img { transform: scale(1.05); }
+
+/* Insignias (Badges) con degradado */
+.card-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--primary-mix); color: white;
+  padding: 0.25rem 0.75rem; border-radius: 50px;
+  font-size: 0.75rem; font-weight: 600;
+  box-shadow: 0 4px 10px rgba(114, 9, 183, 0.2);
+}
+
+.card-body { padding: 1.25rem; display: flex; flex-direction: column; flex: 1; }
+.card-cat { font-size: 0.75rem; text-transform: uppercase; color: var(--primary-celeste); font-weight: 700; letter-spacing: 0.5px; margin-bottom: 4px; }
+.card-name { font-size: 1.05rem; font-weight: 600; color: var(--text-main); margin-bottom: 6px; line-height: 1.4; }
+.card-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 1.25rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+.card-footer { margin-top: auto; display: flex; align-items: center; justify-content: space-between; }
+.price { font-size: 1.3rem; font-weight: 700; color: var(--text-main); }
+.price sup { font-size: 0.75rem; font-weight: 600; margin-right: 2px; }
+
+/* Botones Agregar / Quitar */
+.add-btn {
+  padding: 0.6rem 1.1rem; border-radius: 50px; border: 1px solid rgba(0, 180, 216, 0.2);
+  background: rgba(0, 180, 216, 0.05); color: var(--primary-celeste);
+  font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: var(--transition);
+}
+.add-btn:hover {
+  background: var(--primary-mix); color: white; border-color: transparent;
+  box-shadow: 0 4px 12px rgba(114, 9, 183, 0.2);
+}
+.add-btn.added {
+  background: rgba(114, 9, 183, 0.08); color: var(--primary-morado);
+  border-color: rgba(114, 9, 183, 0.2);
+}
+.add-btn.added:hover {
+  background: #ef4444; color: white; border-color: transparent; /* Se vuelve rojo si vas a quitarlo */
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Estado Vacío */
+.empty-state { display: none; text-align: center; padding: 4rem 2rem; color: var(--text-muted); }
+.empty-state.show { display: block; }
+.empty-state .icon { font-size: 3rem; margin-bottom: 1rem; }
+
+/* ==========================================
+   MODAL CASI COMPLETO (Estética Premium)
+   ========================================== */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(30, 27, 75, 0.4); /* Sombra morada oscura difuminada */
+  backdrop-filter: blur(8px); z-index: 250;
+  align-items: center; justify-content: center; padding: 2rem;
+  animation: fadeIn 0.2s ease;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-content {
+  background: var(--surface); border-radius: 24px;
+  width: min(1100px, 100%); height: min(80vh, 850px);
+  position: relative; overflow: hidden; border: 1px solid var(--border);
+  box-shadow: 0 25px 60px rgba(30, 27, 75, 0.2);
+  animation: slideIn 0.3s cubic-bezier(.34, 1.56, .64, 1);
+}
+
+.modal-close {
+  position: absolute; top: 20px; right: 20px;
+  background: var(--surface); border: 1px solid var(--border);
+  width: 38px; height: 38px; border-radius: 50%;
+  cursor: pointer; font-size: 1rem; color: var(--text-muted);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 10; transition: var(--transition);
+}
+.modal-close:hover { background: var(--primary-morado); color: white; transform: rotate(90deg); }
+
+.modal-layout { display: flex; flex-direction: column; height: 100%; }
+
+@media (min-width: 768px) { .modal-layout { flex-direction: row; } }
+
+.modal-img-wrap { flex: 1.1; background: #fafafa; height: 45%; }
+@media (min-width: 768px) { .modal-img-wrap { height: 100%; } }
+.modal-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+.modal-info {
+  flex: 1; padding: 3.5rem; display: flex; flex-direction: column;
+  justify-content: center; height: 55%; overflow-y: auto;
+}
+@media (min-width: 768px) { .modal-info { height: 100%; } }
+.modal-info h2 { font-size: 2.2rem; font-weight: 700; margin: 0.5rem 0 1.5rem; color: var(--text-main); }
+
+/* Viñetas estéticas */
+.modal-info ul li {
+  font-size: 1rem; color: var(--text-muted); line-height: 1.6;
+  list-style: none; position: relative; padding-left: 20px;
+}
+.modal-info ul li::before {
+  content: "✦"; position: absolute; left: 0;
+  background: var(--primary-mix); -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; font-weight: bold;
+}
+
+.modal-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 1.5rem; margin-top: auto; }
+.modal-info .add-btn { padding: 0.8rem 2rem; font-size: 0.95rem; }
+
+/* ==========================================
+   CARRITO SIDEBAR
+   ========================================== */
+.cart-sidebar {
+  position: fixed; top: 0; right: -400px; width: min(400px, 100%); height: 100%;
+  background: var(--surface); z-index: 300; box-shadow: -10px 0 40px rgba(0,0,0,0.1);
+  transition: cubic-bezier(0.4, 0, 0.2, 1) 0.3s; display: flex; flex-direction: column;
+}
+.cart-sidebar.open { right: 0; }
+
+.cart-header { padding: 1.5rem; border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; }
+.cart-header h2 { font-size: 1.3rem; font-weight: 700; }
+.cart-close { background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-muted); }
+
+.cart-items { flex: 1; overflow-y: auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 16px; }
+.cart-item { display: flex; gap: 12px; align-items: center; padding-bottom: 16px; border-bottom: 1px solid rgba(0,0,0,0.03); }
+.ci-icon { width: 60px; height: 60px; border-radius: 8px; overflow: hidden; background: #f5f5f5; }
+.ci-icon img { width: 100%; height: 100%; object-fit: cover; }
+.ci-info { flex: 1; }
+.ci-name { font-size: 0.92rem; font-weight: 600; margin-bottom: 2px; }
+.ci-price { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
+
+/* Botones de cantidad (+/-) */
+.ci-qty { display: flex; align-items: center; gap: 10px; background: rgba(0,0,0,0.03); padding: 2px; border-radius: 50px; width: fit-content; }
+.qty-btn { background: var(--surface); border: none; width: 24px; height: 24px; border-radius: 50%; cursor: pointer; font-weight: 600; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+.qty-val { font-size: 0.85rem; font-weight: 600; min-width: 16px; text-align: center; }
+.ci-remove { background: none; border: none; color: #ef4444; cursor: pointer; font-size: 0.85rem; margin-top: 8px; }
+
+.cart-footer { padding: 1.5rem; border-top: 1px solid var(--border); background: #fbfbfe; }
+.summary-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 0.92rem; color: var(--text-muted); }
+.summary-row.total { font-size: 1.2rem; font-weight: 700; color: var(--text-main); margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+
+.checkout-btn { width: 100%; padding: 1rem; border-radius: 50px; border: none; background: var(--primary-mix); color: white; font-weight: 600; font-size: 1rem; cursor: pointer; margin-top: 1rem; transition: var(--transition); box-shadow: 0 4px 15px rgba(114, 9, 183, 0.2); }
+.checkout-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(114, 9, 183, 0.3); }
+
+.cart-empty { text-align: center; color: var(--text-muted); margin-top: 4rem; }
+.cart-empty .icon { font-size: 2.5rem; margin-bottom: 8px; }
+
+/* Capa Oscura (Overlay) general */
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); z-index: 280; display: none; }
+.overlay.open { display: block; }
+
+/* Footer Informativo */
+footer.site-footer { text-align: center; padding: 2.5rem; color: var(--text-muted); font-size: 0.88rem; border-top: 1px solid var(--border); margin-top: auto; }
+
+/* Toast Notificaciones */
+#toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
+  background: #1e1b4b; color: white; padding: 0.8rem 1.6rem; border-radius: 50px;
+  font-size: 0.9rem; font-weight: 500; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  z-index: 400; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none; border: 1px solid rgba(255,255,255,0.1);
+}
+#toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ==========================================
+   ANIMACIONES
+   ========================================== */
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideIn { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+.cart-empty {
+  text-align: center;
+  color: var(--text-muted);
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+/* El contenedor del nuevo icono */
+.cart-empty .icon i {
+  font-size: 3.5rem; /* Lo hacemos grande y elegante */
+  background: var(--primary-mix); /* Degradado celeste y morado */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.6; /* Un toque sutil de transparencia por estar vacío */
+}
+
+.cart-empty p {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+/* ==========================================
+   DISEÑO ESTRUCTURAL RETAIL (ESTILO FALABELLA)
+   ========================================== */
+
+/* Banner Principal Contenedor Limpio */
+.hero-clean {
+  max-width: 1200px;
+  margin: 1.5rem auto;
+  padding: 0 2rem;
+}
+.hero-clean img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+}
+
+/* Sección de Tarjetas de Promoción */
+.retail-promo-section {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+  padding: 0 2rem;
+}
+
+.retail-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px;
+}
+
+.retail-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px; /* Bordes más rectos estilo corporativo */
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s ease;
+}
+.retail-card:hover {
+  transform: translateY(-4px);
+}
+
+.rc-img-wrap {
+  width: 100%;
+  height: 280px;
+  background: #f9fafb;
+}
+.rc-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* El pie de la tarjeta se divide horizontalmente */
+.rc-footer {
+  display: flex;
+  height: 75px;
+  border-top: 1px solid #f3f4f6;
+  align-items: stretch;
+}
+
+.rc-text {
+  flex: 1;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.rc-text h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 2px;
+}
+.rc-text p {
+  font-size: 0.75rem;
+  color: #6b7280;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* El famoso bloque rectangular de precio de Falabella */
+.rc-price-block {
+  width: 110px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+  color: #ffffff;
+  text-align: center;
+}
+
+/* Variaciones de color sólido e intenso para tus marcas */
+.rc-price-block.morado { background-color: #7209b7; }
+.rc-price-block.celeste { background-color: #00b4d8; }
+
+.price-now {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: block;
+}
+.price-old {
+  font-size: 0.65rem;
+  opacity: 0.85;
+  display: block;
+}
+
+/* ==========================================
+   SECCIÓN BANNERS "VENTA POWER"
+   ========================================== */
+.power-banners-section {
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  padding: 0 2rem;
+}
+
+.power-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+  gap: 16px;
+}
+
+@media (max-width: 550px) {
+  .power-grid { grid-template-columns: 1fr; }
+}
+
+.power-banner {
+  height: 160px;
+  border-radius: 4px;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+.power-banner:hover { opacity: 0.95; }
+
+/* Fondos con fuerza comercial usando tus colores */
+.power-banner.lila-gradient {
+  background: linear-gradient(135deg, #4d0782 0%, #7209b7 100%);
+}
+.power-banner.celeste-gradient {
+  background: linear-gradient(135deg, #0077b6 0%, #00b4d8 100%);
+}
+
+.pb-content {
+  color: #ffffff;
+  z-index: 2;
+  max-width: 70%;
+}
+.pb-content h2 {
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.pb-content p {
+  font-size: 0.85rem;
+  font-weight: 600;
+  opacity: 0.9;
+  margin-bottom: 12px;
+}
+.pb-link {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-decoration: underline;
+}
+/* ==========================================
+   ESTILOS DE DESCUENTO AUTOMÁTICO EN EL CATÁLOGO
+   ========================================== */
+
+/* Bloque contenedor de precios en la tarjeta normal */
+.catalog-price-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+/* Precio original tachado */
+.price-old-crossed {
+  font-size: 0.78rem;
+  color: #9ca3af;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* Precio nuevo resaltado */
+.price-sale {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #7209b7; /* Color de oferta unificado */
+}
+.price-sale sup {
+  font-size: 0.7rem;
+  font-weight: 600;
+}
+
+/* Etiqueta dinámica de porcentaje de descuento */
+.card-badge.discount {
+  background-color: #ef4444; /* Rojo comercial para ofertas */
+  color: #ffffff;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+  </style>
+</head>
+<body>
+
+    <header>
+    <div class="header-container">
+      <div class="logo" onclick="window.location.reload()">
+        <span class="marca-andvi">f@rma</span>/<span class="marca-merx">VILLAZAR</span>
+      </div>
+      <div class="search-wrap">
+        <input type="text" id="search" placeholder="Buscar productos por nombre o descripción...">
+      </div>
+            <button class="cart-trigger" id="cart-trigger">
+            <i class="ri-shopping-cart-2-line"></i> Mi Carrito (<span id="cart-count">0</span>)
+            </button>
+    </div>
+  </header>
+
+  <div class="app-layout">
+    
+    <aside class="sidebar-menu" id="filters">
+      <h3 class="menu-title">Categorías</h3>
+      <button class="filter-chip active" data-cat="todos">✨ Todos los productos</button>
+
+      <details class="menu-dropdown">
+        <summary>💊 Farmacia</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Malestar de la Tos con Flema">Tos con Flema</button>
+          <button class="filter-chip" data-cat="Dolor Generalizado">Dolor Generalizado</button>
+          <button class="filter-chip" data-cat="Cuidado Respiratorio">Cuidado Respiratorio</button>
+          <button class="filter-chip" data-cat="Resfriado Común">Resfriado Común</button>
+          <button class="filter-chip" data-cat="Cólicos Menstruales">Cólicos Menstruales</button>
+          <button class="filter-chip" data-cat="Malestar Estomacal">Malestar Estomacal</button>
+          <button class="filter-chip" data-cat="Malestar General y Fiebre">Malestar General y Fiebre</button>
+          <button class="filter-chip" data-cat="Herbolario">Herbolario</button>
+          <button class="filter-chip" data-cat="Cuidado Muscular y Articular">Cuidado Muscular y Articular</button>
+          <button class="filter-chip" data-cat="Oídos">Oídos</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown">
+        <summary>🩺 Salud</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Sistema Urinario">Sistema Urinario</button>
+          <button class="filter-chip" data-cat="Sistema Sanguíneo">Sistema Sanguíneo</button>
+          <button class="filter-chip" data-cat="Sistema Óseo y Articulaciones">Óseo y Articulaciones</button>
+          <button class="filter-chip" data-cat="Sistema Nervioso">Sistema Nervioso</button>
+          <button class="filter-chip" data-cat="Sistema Digestivo">Sistema Digestivo</button>
+          <button class="filter-chip" data-cat="Sistema Cardiovascular">Sistema Cardiovascular</button>
+          <button class="filter-chip" data-cat="Sistema Respiratorio">Sistema Respiratorio</button>
+          <button class="filter-chip" data-cat="Productos Galénicos">Productos Galénicos</button>
+          <button class="filter-chip" data-cat="Problemas Generales">Problemas Generales</button>
+          <button class="filter-chip" data-cat="Preparados Estomatológicos">Prep. Estomatológicos</button>
+          <button class="filter-chip" data-cat="Otológicos">Otológicos</button>
+          <button class="filter-chip" data-cat="Oftalmológicos">Oftalmológicos</button>
+          <button class="filter-chip" data-cat="Infecciones y Otros">Infecciones y Otros</button>
+          <button class="filter-chip" data-cat="Hormonas">Hormonas</button>
+          <button class="filter-chip" data-cat="Cuidado Dermatológico">Cuidado Dermatológico</button>
+          <button class="filter-chip" data-cat="Cuidado del Higado">Cuidado del Hígado</button>
+          <button class="filter-chip" data-cat="Cuidado de la Mujer">Cuidado de la Mujer</button>
+          <button class="filter-chip" data-cat="Antibacterianos">Antibacterianos</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown">
+        <summary>👶 Mamá y Bebé</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Vitaminas y Suplementos">Vitaminas y Suplementos</button>
+          <button class="filter-chip" data-cat="Todo en Ninet Toallitas Húmedas">Pañitos Ninet</button>
+          <button class="filter-chip" data-cat="Pañales para Bebé">Pañales para Bebé</button>
+          <button class="filter-chip" data-cat="Fórmula para Bebés">Fórmula para Bebés</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown">
+        <summary>🥝 Nutrición para Todos</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Vitaminas">Vitaminas</button>
+          <button class="filter-chip" data-cat="Suplementos/Nutricionales">Suplementos Nutricionales</button>
+          <button class="filter-chip" data-cat="Suplementos/Complementos">Suplementos Complementos</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown">
+        <summary>🔬 Dermatología</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Cuidado Capilar Fotoprotector">Capilar Fotoprotector</button>
+          <button class="filter-chip" data-cat="Tratamiento Facial">Tratamiento Facial</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown">
+        <summary>🧼 Cuidado Personal</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Cuidado Íntimo">Cuidado Íntimo</button>
+          <button class="filter-chip" data-cat="Baño">Baño</button>
+          <button class="filter-chip" data-cat="Cuidado de la Piel">Cuidado de la Piel</button>
+          <button class="filter-chip" data-cat="Jabones">Jabones</button>
+          <button class="filter-chip" data-cat="Cuidado del Cabello">Cuidado del Cabello</button>
+          <button class="filter-chip" data-cat="Cuidado Bucal">Cuidado Bucal</button>
+          <button class="filter-chip" data-cat="Afeitadores">Afeitadores</button>
+          <button class="filter-chip" data-cat="Desodorantes">Desodorantes</button>
+          <button class="filter-chip" data-cat="Bienestar Sexual">Bienestar Sexual</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown">
+        <summary>🧓 Adulto Mayor</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Nutrición Adulto">Nutrición Adulto</button>
+          <button class="filter-chip" data-cat="Vitaminas para Adultos">Vitaminas para Adultos</button>
+        </div>
+      </details>
+
+      <details class="menu-dropdown">
+        <summary>🩺 Dispositivos Médicos</summary>
+        <div class="dropdown-content">
+          <button class="filter-chip" data-cat="Test de Embarazo">Test de Embarazo</button>
+          <button class="filter-chip" data-cat="Termómetros">Termómetros</button>
+          <button class="filter-chip" data-cat="Oxímetros">Oxímetros</button>
+          <button class="filter-chip" data-cat="Ortopedia">Ortopedia</button>
+          <button class="filter-chip" data-cat="Nebulizadores">Nebulizadores</button>
+          <button class="filter-chip" data-cat="Botiquín">Botiquín</button>
+          <button class="filter-chip" data-cat="Otros Dispositivos">Otros</button>
+        </div>
+      </details>
+
+      <button class="filter-chip" data-cat="Belleza">✨ Belleza</button>
+      <button class="filter-chip" data-cat="Cosmética">💄 Cosmética</button>
+      <button class="filter-chip" data-cat="Productos Naturales">🌿 Productos Naturales</button>
+    </aside>
+
+    <main class="content-panel">
+      
+      <section class="hero-clean">
+        <img src="Gemini_Generated_Image_qd868aqd868aqd86 (1).png" alt="Banner Principal MERX">
+      </section>
+
+      <section class="retail-promo-section">
+        <div class="retail-grid">
+          <div class="retail-card" onclick="openProductModal(products[0])">
+            <div class="rc-img-wrap"><img src="vitc.jpg" alt="Vitamin C"></div>
+            <div class="rc-footer">
+              <div class="rc-text"><h4>VITAMIN C</h4><p>Inmunidad Eficaz</p></div>
+              <div class="rc-price-block morado"><span class="price-now">S/69.9</span><span class="price-old">Reg: S/80</span></div>
+            </div>
+          </div>
+          <div class="retail-card" onclick="openProductModal(products[1])">
+            <div class="rc-img-wrap"><img src="eucerin.webp" alt="Eucerin"></div>
+            <div class="rc-footer">
+              <div class="rc-text"><h4>EUCERIN</h4><p>Protección FPS 70</p></div>
+              <div class="rc-price-block celeste"><span class="price-now">S/ 79.9</span><span class="price-old">Reg: S/89.9</span></div>
+            </div>
+          </div>
+          <div class="retail-card" onclick="openProductModal(products[6])">
+            <div class="rc-img-wrap"><img src="vibranza.webp" alt="Vibranza"></div>
+            <div class="rc-footer">
+              <div class="rc-text"><h4>ESIKA</h4><p>Vibranza Fragancia</p></div>
+              <div class="rc-price-block morado"><span class="price-now">S/ 49.9</span><span class="price-old">Reg: S/59.9</span></div>
+            </div>
+          </div>
+          <div class="retail-card" onclick="openProductModal(products[4])">
+            <div class="rc-img-wrap"><img src="cere.jpg" alt="Ceregen"></div>
+            <div class="rc-footer">
+              <div class="rc-text"><h4>CEREGEN</h4><p>Jarabe Mental</p></div>
+              <div class="rc-price-block celeste"><span class="price-now">S/ 45.00</span><span class="price-old">Antes: S/49.9</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="power-banners-section">
+        <div class="power-grid">
+          
+          <div class="power-banner lila-gradient" id="banner-andvi">
+            <div class="pb-content">
+              <h2>ANDVI POWER</h2>
+              <p>HASTA 40% DSCTO EN SUPLEMENTOS Y VITAMINAS</p>
+              <span class="pb-link">VER PRODUCTOS EN OFERTA →</span>
+            </div>
+          </div>
+
+          <div class="power-banner celeste-gradient" id="banner-merx">
+            <div class="pb-content">
+              <h2>MERX POWER</h2>
+              <p>FESTIVAL DE PERFUMERÍA Y PROTECCIÓN EXCLUSIVA</p>
+              <span class="pb-link">VER PRODUCTOS EN OFERTA →</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <div class="section-title-alt">
+        <h2>Catálogo de Productos</h2>
+        <span id="result-count">(0 productos)</span>
+      </div>
+
+      <div class="main-grid" id="grid"></div>
+
+      <div class="empty-state" id="empty">
+        <div class="icon">🔍</div>
+        <h3>No hay productos en esta categoría</h3>
+        <p>Intenta buscando otro término o seleccionando otra sección del menú.</p>
+      </div>
+    </main>
+
+  </div>
+
+  <div class="modal-overlay" id="product-modal">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <button class="modal-close" onclick="closeProductModal(null)">✕</button>
+      <div class="modal-layout">
+        <div class="modal-img-wrap"><img id="modal-img" src="" alt=""></div>
+        <div class="modal-info">
+          <span class="card-cat" id="modal-cat">Categoría</span>
+          <h2 id="modal-name">Nombre del Producto</h2>
+          <div id="modal-desc"></div>
+          <div class="modal-footer">
+            <span class="price" id="modal-price"><sup>S/.</sup>0.00</span>
+            <button class="add-btn" id="modal-action-btn">+ Agregar al carrito</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h2>Tu Carrito de Compras</h2>
+      <button class="cart-close" id="cart-close">✕</button>
+    </div>
+    <div class="cart-items" id="cart-items"></div>
+    <div class="cart-footer" id="cart-footer" style="display: none;">
+      <div class="summary-row"><span>Subtotal:</span><span id="subtotal">S/. 0.00</span></div>
+      <div class="summary-row"><span>Envío:</span><span id="shipping">S/. 0.00</span></div>
+      <div class="summary-row total"><span>Total a pagar:</span><span id="total">S/. 0.00</span></div>
+      <button class="checkout-btn" id="checkout-btn">Proceder al Pago 🚀</button>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+  <div id="toast">Producto añadido con éxito</div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 ANDVISHOP / MERX. Todos los derechos reservados.</p>
+  </footer>
+
+  <script >
+const products = [
+  { 
+    id:1, 
+    name:"vitamin c", 
+    cat:"Vitaminas", 
+    price:129.90, 
+    oldPrice:159.00, // <--- PRECIO ANTERIOR (Se tachará solo)
+    promo:"andvi",    // <--- Vinculado a ANDVI POWER
+    image:"vitc.jpg", 
+    desc:"vitamina c 1000mg.", 
+    specs: ["Soporte inmunológico.", "Producción natural de colágeno."]
+  },
+  { 
+    id:2, 
+    name:"eucerin bloqueador 90gr", 
+    cat:"Cuidado de la Piel", 
+    price:249.90, 
+    oldPrice:289.00, // <--- PRECIO ANTERIOR
+    promo:"merx",    // <--- Vinculado a MERX POWER
+    image:"eucerin.webp", 
+    desc:"bloqueador solar 70fps.",
+    specs: ["Protección solar facial FPS 70.", "Textura ligera toque seco."]
+  },
+  { 
+    id:3, 
+    name:"kativa shampoo ", 
+    cat:"Cuidado del Cabello", 
+    price:189.50, 
+    image:"kativa.webp", 
+    desc:"revitaliza el cuero cabelludo.", 
+    specs: ["Libre de sal y sulfatos.", "Enriquecido con keratina."]
+  },
+  { 
+    id:4, 
+    name:"colageno hidrolizado 800gr", 
+    cat:"Suplementos/Nutricionales", 
+    price:79.90, 
+    oldPrice:99.00,
+    promo:"andvi",
+    image:"colag.webp", 
+    desc:"bueno para la elasticidad de la piel y fortalece los huesos.",
+    specs: ["Máxima absorción.", "Fortalece articulaciones y tendones."]
+  },
+  { 
+    id:5, 
+    name:"ceregen jarabe 300ml", 
+    cat:"Malestar General y Fiebre", 
+    price:45.00, 
+    oldPrice:60.00,
+    image:"cere.jpg", 
+    desc:"ayuda a mejorar la concentración y el cansancio mental.",
+    specs: ["Optimiza la memoria.", "Combate la fatiga mental."]
+  },
+  { 
+    id:6, 
+    name:"paracetamol jbe 120mg/5ml", 
+    cat:"Malestar General y Fiebre", 
+    price:35.00, 
+    image:"paracetamol.webp", 
+    desc:"reduce la fiebre, malestar y calma los dolores.",
+    specs: ["Acción analgésica rápida.", "Agradable sabor infantil."]
+  },
+  { 
+    id:7, 
+    name:"esika vibranza 50ml", 
+    cat:"Baño", 
+    price:199.90, 
+    oldPrice:240.00,
+    promo:"merx",
+    image:"vibranza.webp", 
+    desc:"con notas frescas de toronja, ruibarbo, arándano y café.",
+    specs: ["Alta concentración.", "Notas orientales dulces."]
+  },
+  { 
+    id:8, 
+    name:"black suede secret 100ml", 
+    cat:"Baño", 
+    price:149.00, 
+    image:"blacksecret.webp", 
+    desc:"Fragancia amaderada ámbar.", 
+    specs: ["Corazón amaderado.", "Alta fijación masculina."]
+  }
+];
+
+// ==========================================
+// LÓGICA DE RENDERIZADO INTELIGENTE CON DESCUENTOS
+// ==========================================
+
+// Reemplaza tu función actual de pintar productos (ejm: displayProducts o renderGrid) por esta:
+function renderProducts(productsToRender) {
+  const grid = document.getElementById('grid');
+  const countSpan = document.getElementById('result-count');
+  const emptyDiv = document.getElementById('empty');
+  
+  if (!grid) return;
+  grid.innerHTML = ''; // Limpia la grilla antes de pintar
+  
+  if (countSpan) countSpan.textContent = `(${productsToRender.length} productos)`;
+  
+  if (productsToRender.length === 0) {
+    if (emptyDiv) emptyDiv.style.display = 'block';
+    return;
+  } else {
+    if (emptyDiv) emptyDiv.style.display = 'none';
+  }
+
+  productsToRender.forEach(p => {
+    const div = document.createElement('div');
+    div.className = 'card';
+
+    // Control dinámico de Precios e insignias de oferta
+    let priceHTML = `<span class="price"><sup>S/.</sup>${p.price.toFixed(2)}</span>`;
+    let badgeHTML = '';
+
+    if (p.oldPrice && p.oldPrice > p.price) {
+      // Calcula el porcentaje de descuento automáticamente para CUALQUIER vista
+      const discountPercent = Math.round(((p.oldPrice - p.price) / p.oldPrice) * 100);
+      badgeHTML = `<span class="card-badge discount">-${discountPercent}%</span>`;
+      priceHTML = `
+        <div class="catalog-price-block">
+          <span class="price-old-crossed">S/. ${p.oldPrice.toFixed(2)}</span>
+          <span class="price-sale"><sup>S/.</sup>${p.price.toFixed(2)}</span>
+        </div>
+      `;
+    } else if (p.badge) {
+      badgeHTML = `<span class="card-badge">${p.badge}</span>`;
+    }
+
+    div.innerHTML = `
+      <div class="card-img">
+        <img src="${p.image}" alt="${p.name}">
+        ${badgeHTML}
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-footer">
+          ${priceHTML}
+          <button class="add-btn">+ Agregar</button>
+        </div>
+      </div>
+    `;
+
+    // Eventos de la tarjeta
+    div.addEventListener('click', () => openProductModal(p));
+    div.querySelector('.add-btn').addEventListener('click', e => {
+      e.stopPropagation();
+      toggleCartItem(p); // Llama a tu función nativa del carrito
+    });
+
+    grid.appendChild(div);
+  });
+}
+
+// ==========================================
+// INTERACCIÓN DE LOS BANNERS POWER (FILTROS COLECTIVOS)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+  const andviBanner = document.getElementById('banner-andvi');
+  const merxBanner = document.getElementById('banner-merx');
+
+  if (andviBanner) {
+    andviBanner.addEventListener('click', () => {
+      // Filtra solo productos de la campaña 'andvi'
+      const campaignProducts = products.filter(p => p.promo === 'andvi');
+      
+      // Quita el estado activo del menú lateral
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      
+      // Renderiza e interactúa scroll
+      renderProducts(campaignProducts);
+      document.getElementById('grid').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  if (merxBanner) {
+    merxBanner.addEventListener('click', () => {
+      // Filtra solo productos de la campaña 'merx'
+      const campaignProducts = products.filter(p => p.promo === 'merx');
+      
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      
+      renderProducts(campaignProducts);
+      document.getElementById('grid').scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+});
+let cart = [];
+let filterCat = "todos";
+let query = "";
+let activeModalProductId = null;
+
+function fmt(n) { return "S/. " + n.toFixed(2); }
+
+function render() {
+  const grid = document.getElementById('grid');
+  const empty = document.getElementById('empty');
+  const rc = document.getElementById('result-count');
+
+  const filtered = products.filter(p => {
+    const matchCat = filterCat === "todos" || p.cat === filterCat;
+    const matchQ = p.name.toLowerCase().includes(query.toLowerCase()) || p.desc.toLowerCase().includes(query.toLowerCase());
+    return matchCat && matchQ;
+  });
+
+  if (rc) rc.textContent = `(${filtered.length} producto${filtered.length !== 1 ? 's' : ''})`;
+  if (grid) grid.innerHTML = '';
+
+  if (!filtered.length) {
+    if (empty) empty.classList.add('show');
+    return;
+  }
+  if (empty) empty.classList.remove('show');
+
+  filtered.forEach(p => {
+    const inCart = cart.find(c => c.id === p.id);
+    const div = document.createElement('div');
+    div.className = 'card';
+    div.innerHTML = `
+      <div class="card-img">
+        <img src="${p.image}" alt="${p.name}">
+        ${p.badge ? `<span class="card-badge">${p.badge}</span>` : ''}
+      </div>
+      <div class="card-body">
+        <div class="card-cat">${p.cat}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-desc">${p.desc}</div>
+        <div class="card-footer">
+          <span class="price"><sup>S/.</sup>${p.price.toFixed(2)}</span>
+          <button class="add-btn ${inCart ? 'added' : ''}" data-id="${p.id}">
+            ${inCart ? '✓ Quitar' : '+ Agregar'}
+          </button>
+        </div>
+      </div>
+    `;
+    
+    div.addEventListener('click', () => openProductModal(p));
+    
+    const btn = div.querySelector('.add-btn');
+    if (btn) {
+      btn.addEventListener('click', e => { 
+        e.stopPropagation(); 
+        toggleCartItem(p); 
+      });
+    }
+    
+    if (grid) grid.appendChild(div);
+  });
+
+  if (activeModalProductId !== null) {
+    const currentProduct = products.find(p => p.id === activeModalProductId);
+    if (currentProduct) updateModalButton(currentProduct);
+  }
+}
+
+function toggleCartItem(p) {
+  const idx = cart.findIndex(c => c.id === p.id);
+  
+  if (idx >= 0) {
+    cart.splice(idx, 1);
+    showToast(`"${p.name}" eliminado del carrito`);
+  } else {
+    cart.push({ ...p, qty: 1 });
+    showToast(`"${p.name}" añadido al carrito`);
+  }
+  
+  updateCart();
+  render();
+}
+
+function updateCart() {
+  const countEl = document.getElementById('cart-count');
+  const itemsEl = document.getElementById('cart-items');
+  const footerEl = document.getElementById('cart-footer');
+
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  const count = cart.reduce((s, c) => s + c.qty, 0);
+  if (countEl) countEl.textContent = count;
+
+  if (!cart.length) {
+    if (itemsEl) {
+      itemsEl.innerHTML = `
+        <div class="cart-empty">
+          <div class="icon"><i class="ri-shopping-cart-2-line"></i></div>
+          <p>Tu carrito está vacío</p>
+        </div>
+      `;
+    }
+    if (footerEl) footerEl.style.display = 'none';
+    return;
+  }
+  if (footerEl) footerEl.style.display = 'block';
+
+  if (itemsEl) {
+    itemsEl.innerHTML = '';
+    cart.forEach(item => {
+      const el = document.createElement('div');
+      el.className = 'cart-item';
+      el.innerHTML = `
+        <div class="ci-icon"><img src="${item.image}" alt="${item.name}"></div>
+        <div class="ci-info">
+          <div class="ci-name">${item.name}</div>
+          <div class="ci-price">${fmt(item.price)} c/u</div>
+          <div class="ci-qty">
+            <button class="qty-btn" data-dir="-1">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button class="qty-btn" data-dir="1">+</button>
+          </div>
+        </div>
+        <div style="text-align:right; display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end;">
+          <div style="font-weight:600; font-size:0.9rem;">${fmt(item.price * item.qty)}</div>
+          <button class="ci-remove">✕ Eliminar</button>
+        </div>
+      `;
+      el.querySelectorAll('.qty-btn').forEach(btn => btn.addEventListener('click', () => changeQty(item.id, +btn.dataset.dir || (btn.textContent === '+' ? 1 : -1))));
+      el.querySelector('.ci-remove').addEventListener('click', () => {
+        removeItem(item.id);
+        showToast(`"${item.name}" eliminado del carrito`);
+      });
+      itemsEl.appendChild(el);
+    });
+  }
+
+  const shipping = total >= 100 ? 0 : 12;
+  const subtotalBtn = document.getElementById('subtotal');
+  const shippingBtn = document.getElementById('shipping');
+  const totalBtn = document.getElementById('total');
+
+  if (subtotalBtn) subtotalBtn.textContent = fmt(total);
+  if (shippingBtn) shippingBtn.textContent = shipping === 0 ? 'Gratis 🎉' : fmt(shipping);
+  if (totalBtn) totalBtn.textContent = fmt(total + shipping);
+}
+
+function changeQty(id, dir) {
+  const idx = cart.findIndex(c => c.id === id);
+  if (idx < 0) return;
+  cart[idx].qty += dir;
+  if (cart[idx].qty <= 0) {
+    const name = cart[idx].name;
+    cart.splice(idx, 1);
+    showToast(`"${name}" eliminado del carrito`);
+  }
+  updateCart();
+  render();
+}
+
+function removeItem(id) {
+  cart = cart.filter(c => c.id !== id);
+  updateCart();
+  render();
+}
+
+function openProductModal(p) {
+  activeModalProductId = p.id;
+  const imgEl = document.getElementById('modal-img');
+  const catEl = document.getElementById('modal-cat');
+  const nameEl = document.getElementById('modal-name');
+  const descEl = document.getElementById('modal-desc');
+  const priceEl = document.getElementById('modal-price');
+
+  if (imgEl) { imgEl.src = p.image; imgEl.alt = p.name; }
+  if (catEl) catEl.textContent = p.cat;
+  if (nameEl) nameEl.textContent = p.name;
+  if (priceEl) priceEl.innerHTML = `<sup>S/.</sup>${p.price.toFixed(2)}`;
+  
+  if (descEl) {
+    if (p.specs && p.specs.length > 0) {
+      let listHtml = '<ul style="padding-left: 0; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 10px;">';
+      p.specs.forEach(spec => {
+        listHtml += `<li>${spec}</li>`;
+      });
+      listHtml += '</ul>';
+      descEl.innerHTML = listHtml;
+    } else {
+      descEl.textContent = p.desc;
+    }
+  }
+
+  const actionBtn = document.getElementById('modal-action-btn');
+  if (actionBtn) {
+    const newActionBtn = actionBtn.cloneNode(true);
+    actionBtn.parentNode.replaceChild(newActionBtn, actionBtn);
+    newActionBtn.addEventListener('click', () => toggleCartItem(p));
+  }
+
+  updateModalButton(p);
+  const modal = document.getElementById('product-modal');
+  if (modal) modal.classList.add('open');
+}
+
+function closeProductModal(e) {
+  const modal = document.getElementById('product-modal');
+  if (e === null || e.target === modal || e.target.classList.contains('modal-close')) {
+    if (modal) modal.classList.remove('open');
+    activeModalProductId = null;
+  }
+}
+
+function updateModalButton(p) {
+  const btn = document.getElementById('modal-action-btn');
+  if (!btn) return;
+  const inCart = cart.find(c => c.id === p.id);
+  if (inCart) {
+    btn.className = 'add-btn added';
+    btn.textContent = '✓ Quitar del carrito';
+  } else {
+    btn.className = 'add-btn';
+    btn.textContent = '+ Agregar al carrito';
+  }
+}
+
+function toggleCart() {
+  const sidebar = document.getElementById('cart-sidebar');
+  const overlay = document.getElementById('overlay');
+  if (sidebar) sidebar.classList.toggle('open');
+  if (overlay) overlay.classList.toggle('open');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  if (!t) return;
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2200);
+}
+
+function checkout() {
+  if (!cart.length) return;
+  const total = cart.reduce((s, c) => s + c.price * c.qty, 0);
+  const shipping = total >= 100 ? 0 : 12;
+  alert(`¡Gracias por tu compra!\n\nTotal: S/. ${(total + shipping).toFixed(2)}\n\n(Aquí conectarías tu pasarela de pago)`);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const searchEl = document.getElementById('search');
+  const filtersEl = document.getElementById('filters');
+  const cartTrigger = document.getElementById('cart-trigger');
+  const cartClose = document.getElementById('cart-close');
+  const overlayEl = document.getElementById('overlay');
+  const checkoutBtn = document.getElementById('checkout-btn');
+
+  if (searchEl) searchEl.addEventListener('input', e => { query = e.target.value; render(); });
+  
+  if (filtersEl) {
+    filtersEl.addEventListener('click', e => {
+      if (!e.target.matches('.filter-chip')) return;
+      document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+      e.target.classList.add('active');
+      filterCat = e.target.dataset.cat;
+      render();
+    });
+  }
+
+  if (cartTrigger) cartTrigger.addEventListener('click', toggleCart);
+  if (cartClose) cartClose.addEventListener('click', toggleCart);
+  if (overlayEl) overlayEl.addEventListener('click', toggleCart);
+  if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
+
+  // Asegura el cierre de la ventana de detalles haciendo clic fuera
+  const modalEl = document.getElementById('product-modal');
+  if (modalEl) modalEl.addEventListener('click', closeProductModal);
+
+  render();
+  updateCart();
+});
+  </script>
+</body>
+</html>
